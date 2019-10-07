@@ -10,6 +10,7 @@
 
 # 小结：
 >在swiper配置项的事件函数内，获取vue实例
+- 1
 ```javascript
 ...
 data(){
@@ -22,6 +23,24 @@ data(){
                 slideChangeTransitionEnd:function () {
                     console.log(this);// swiper对象
                     cosnole.log(vm); //当前组件对象
+                },
+            }
+      }
+    }
+}
+...
+```
+- 2
+```javascript
+...
+data(){
+    let vm=this;
+    return{
+        name:'swiper',
+        swiperOption: {
+            on: {
+                slideChangeTransitionEnd:() =>{
+                    console.log(this);// 当前组件对象
                 },
             }
       }
