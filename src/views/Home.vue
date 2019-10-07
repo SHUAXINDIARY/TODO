@@ -1,27 +1,27 @@
 <template>
   <div class="home" ref="target">
-    <ul class="nav">
-      <li>
-        <span class="iconfont icon-instruction"></span>
-      </li>
-      <li class="tittle">TODO</li>
-      <li>
-        <span class="iconfont icon-search"></span>
-      </li>
-    </ul>
-    <ul class="user">
-      <li v-for="(item,index) in user" :key="index">{{item}}</li>
-    </ul>
-    <!-- 轮播 -->
-    <swiper class="swiper-container" :options="swiperOption" ref="mySwiper">
-      <swiper-slide ref="slide" class="swiper-slide" v-for="(item,index) in cards" :key="index">
-        <p>
-          <span :class="item.icon"></span>
-        </p>
-        <p>{{item.name}}</p>
-        <p>{{item.des}}</p>
-      </swiper-slide>
-    </swiper>
+      <ul class="nav">
+        <li>
+          <span class="iconfont icon-instruction"></span>
+        </li>
+        <li class="tittle">TODO</li>
+        <li>
+          <span class="iconfont icon-search"></span>
+        </li>
+      </ul>
+      <ul class="user">
+        <li v-for="(item,index) in user" :key="index">{{item}}</li>
+      </ul>
+      <!-- 轮播 -->
+      <swiper class="swiper-container" :options="swiperOption" ref="mySwiper">
+        <swiper-slide ref="slide" class="swiper-slide" v-for="(item,index) in cards" :key="index">
+          <p>
+            <span :class="item.icon"></span>
+          </p>
+          <p>{{item.name}}</p>
+          <p>{{item.des}}</p>
+        </swiper-slide>
+      </swiper>
   </div>
 </template>
 
@@ -32,7 +32,7 @@ import { swiper, swiperSlide } from "vue-awesome-swiper";
 export default {
   name: "home",
   data() {
-    let vm=this;
+    let vm = this;
     return {
       backColor: ["lightsalmon", "lightskyblue", "lightsalmon"],
       user: {
@@ -57,18 +57,16 @@ export default {
         }
       ],
       swiperOption: {
-        // 选项配置
-        // loop: true, //开启循环
         on: {
           // swiper 当切换到下一页时 执行该函数
-          slideChangeTransitionEnd:function () {
-            // console.log(this.$refs.target);
-            console.log(vm.$refs.target.style.backgroundColor);
-            vm.$refs.target.style.backgroundColor=vm.backColor[this.activeIndex];
+          slideChangeTransitionEnd: function() {
+            // 改变背景色
+            vm.$refs.target.style.backgroundColor =
+              vm.backColor[this.activeIndex];
           },
           // 点击每一页 进行编程路由跳转
           click(e) {
-            console.log("click");
+            vm.$router.push({ path: "Card" });
           }
         }
       }

@@ -9,6 +9,8 @@ Vue.use(VueAwesomeSwiper, /* { default global options } */)
 
 // iconfont css
 import './assets/icon/iconfont.css'
+// animatecss
+import './assets/css/animate.css'
 
 Vue.config.productionTip = false
 
