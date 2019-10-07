@@ -20,11 +20,11 @@
         <input type="text" placeholder="这里输入" ref="in" />
       </p>
       <p>
-        <button @click="ok">确定</button>
+        <button @click="addItem($refs.in.value)">确定</button>
       </p>
     </div>
     <div class="btn">
-      <span @click="addItem">+</span>
+      <span @click="showAdd">+</span>
     </div>
   </div>
 </template>
@@ -43,22 +43,41 @@ export default {
     goHome() {
       this.$router.push("/");
     },
-    // 改变待办事项状态
+    // 改变待办事项状态  并判断是否删除
     mark(index) {
+      // status时true  完成 删除
       this.items[index].status = !this.items[index].status;
+      this.delItem(index);
+
+      // status 是false 未完成 添加回来
+      if (this.items[index].status == false) {
+        this.addItem(this.items[index].note);
+      }
     },
     // 切换添加任务模块显示
-    addItem() {
+    showAdd() {
       this.input = !this.input;
     },
+    delItem(index) {
+      // 添加到全局状态中
+      let vm = this;
+      this.$store.commit({
+        type: "delItem",
+        data: vm.tittle,
+        // item: vm.$refs.in.value,
+        index: index
+      });
+    },
     // 添加新任务
-    ok() {
+    addItem(val) {
+      console.log(val);
       // 添加到全局状态中
       let vm = this;
       this.$store.commit({
         type: "addItem",
         data: vm.tittle,
-        item: vm.$refs.in.value,
+        // item: vm.$refs.in.value,
+        item: val,
         succ() {
           // 成功后重新渲染数据
           vm.initData();
