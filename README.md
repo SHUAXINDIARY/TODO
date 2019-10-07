@@ -14,7 +14,6 @@
 ```javascript
 ...
 data(){
-    let vm=this;
     return{
         name:'swiper',
         swiperOption: {
