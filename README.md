@@ -1,29 +1,29 @@
-# todo
+# 项目介绍
+>一个待办事项的项目
 
-## Project setup
-```
-npm install
-```
+# 技术栈
+>vue+vue-Router+vuex
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+>iconfont
 
-### Compiles and minifies for production
+# 小结：
+>在swiper配置项的事件函数内，获取vue实例
+```javascript
+...
+data(){
+    let vm=this;
+    return{
+        name:'swiper',
+        swiperOption: {
+            on: {
+            // swiper 当切换到下一页时 执行该函数
+                slideChangeTransitionEnd:function () {
+                    console.log(this);// swiper对象
+                    cosnole.log(vm); //当前组件对象
+                },
+            }
+      }
+    }
+}
+...
 ```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
