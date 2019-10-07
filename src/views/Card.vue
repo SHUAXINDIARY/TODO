@@ -75,7 +75,7 @@ export default {
       this.tittle = this.$store.state.cards[cardIndex].name;
       let name = this.tittle;
       // 获取待办事项
-      if (this.$store.state[name] != undefined) {
+      if (this.$store.state[name].items.length != 0) {
         this.items = [...this.$store.state[name].items];
       }
     }

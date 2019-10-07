@@ -32,6 +32,8 @@ import mutations from './mutations'
 import actions from './actions'
 import Today from './modules/today'
 import Plan from './modules/plan'
+import All from './modules/all'
+
 
 
 
@@ -41,6 +43,7 @@ export default new Vuex.Store({
   actions,
   modules: {
     Today,
-    Plan
+    Plan,
+    All
   }
 })

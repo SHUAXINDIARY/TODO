@@ -2,9 +2,11 @@
 >一个待办事项的项目
 
 # 技术栈
->vue+vue-Router+vuex
+>项目构建:vue+vue-Router+vuex
 
->iconfont
+>图标:iconfont
+
+>过渡动画:animate.css
 
 # 小结：
 >在swiper配置项的事件函数内，获取vue实例
