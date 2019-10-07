@@ -1,27 +1,28 @@
 <template>
   <div class="home" ref="target">
-      <ul class="nav">
-        <li>
-          <span class="iconfont icon-instruction"></span>
-        </li>
-        <li class="tittle">TODO</li>
-        <li>
-          <span class="iconfont icon-search"></span>
-        </li>
-      </ul>
-      <ul class="user">
-        <li v-for="(item,index) in user" :key="index">{{item}}</li>
-      </ul>
-      <!-- 轮播 -->
-      <swiper class="swiper-container" :options="swiperOption" ref="mySwiper">
-        <swiper-slide ref="slide" class="swiper-slide" v-for="(item,index) in cards" :key="index">
-          <p>
-            <span :class="item.icon"></span>
-          </p>
-          <p>{{item.name}}</p>
-          <p>{{item.des}}</p>
-        </swiper-slide>
-      </swiper>
+    <ul class="nav">
+      <li>
+        <span class="iconfont icon-instruction"></span>
+      </li>
+      <li class="tittle">TODO</li>
+      <li>
+        <span class="iconfont icon-search"></span>
+      </li>
+    </ul>
+    <!-- 渲染用户信息 -->
+    <ul class="user">
+      <li v-for="(item,index) in $store.state.user" :key="index">{{item}}</li>
+    </ul>
+    <!-- 轮播 -->
+    <swiper class="swiper-container" :options="swiperOption" ref="mySwiper">
+      <swiper-slide ref="slide" class="swiper-slide" v-for="(item,index) in cards" :key="index">
+        <p>
+          <span :class="item.icon"></span>
+        </p>
+        <p>{{item.name}}</p>
+        <p>{{item.des}}</p>
+      </swiper-slide>
+    </swiper>
   </div>
 </template>
 
@@ -34,28 +35,8 @@ export default {
   data() {
     let vm = this;
     return {
-      backColor: ["lightsalmon", "lightskyblue", "lightsalmon"],
-      user: {
-        name: "shauxin",
-        about: "keep passion"
-      },
-      cards: [
-        {
-          name: "today",
-          icon: "iconfont icon-edit",
-          des: "今天"
-        },
-        {
-          name: "plan",
-          icon: "iconfont icon-clock",
-          des: "计划"
-        },
-        {
-          name: "all",
-          icon: "iconfont icon-favoriteslist",
-          des: "全部"
-        }
-      ],
+      backColor: [],
+      cards: [],
       swiperOption: {
         on: {
           // swiper 当切换到下一页时 执行该函数
@@ -66,7 +47,8 @@ export default {
           },
           // 点击每一页 进行编程路由跳转
           click(e) {
-            vm.$router.push({ path: "Card" });
+            // params传递参数时 使用字符串拼接
+            vm.$router.push({ path: `Card/${this.activeIndex}` });
           }
         }
       }
@@ -78,13 +60,13 @@ export default {
     swiperSlide
   },
   mounted() {
-    this.$nextTick(() => {
-      console.log(1);
-    });
+    // 获取store的数据 渲染到该页
+    this.backColor = this.$store.state.backColor;
+    this.cards = this.$store.state.cards;
   }
 };
 </script>
-<style  scoped>
+<style  lang='less' scoped>
 .home li {
   list-style: none;
 }
@@ -117,11 +99,13 @@ export default {
 .home .user {
   margin-left: 12%;
   color: #ffffff;
-  font-size: 25px;
 }
 
 .home .user li {
   margin: 5%;
+  &:first-child {
+    font-size: 2rem;
+  }
 }
 
 .home .swiper-container {
