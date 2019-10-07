@@ -1,12 +1,158 @@
 <template>
-  <div class="home">
+  <div class="home" ref="target">
+    <ul class="nav">
+      <li>
+        <span class="iconfont icon-instruction"></span>
+      </li>
+      <li class="tittle">TODO</li>
+      <li>
+        <span class="iconfont icon-search"></span>
+      </li>
+    </ul>
+    <ul class="user">
+      <li v-for="(item,index) in user" :key="index">{{item}}</li>
+    </ul>
+    <!-- 轮播 -->
+    <swiper class="swiper-container" :options="swiperOption" ref="mySwiper">
+      <swiper-slide ref="slide" class="swiper-slide" v-for="(item,index) in cards" :key="index">
+        <p>
+          <span :class="item.icon"></span>
+        </p>
+        <p>{{item.name}}</p>
+        <p>{{item.des}}</p>
+      </swiper-slide>
+    </swiper>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-
+import "swiper/dist/css/swiper.css";
+import { swiper, swiperSlide } from "vue-awesome-swiper";
 export default {
-  name: 'home',
-}
+  name: "home",
+  data() {
+    let vm=this;
+    return {
+      backColor: ["lightsalmon", "lightskyblue", "lightsalmon"],
+      user: {
+        name: "shauxin",
+        about: "keep passion"
+      },
+      cards: [
+        {
+          name: "today",
+          icon: "iconfont icon-edit",
+          des: "今天"
+        },
+        {
+          name: "plan",
+          icon: "iconfont icon-clock",
+          des: "计划"
+        },
+        {
+          name: "all",
+          icon: "iconfont icon-favoriteslist",
+          des: "全部"
+        }
+      ],
+      swiperOption: {
+        // 选项配置
+        // loop: true, //开启循环
+        on: {
+          // swiper 当切换到下一页时 执行该函数
+          slideChangeTransitionEnd:function () {
+            // console.log(this.$refs.target);
+            console.log(vm.$refs.target.style.backgroundColor);
+            vm.$refs.target.style.backgroundColor=vm.backColor[this.activeIndex];
+          },
+          // 点击每一页 进行编程路由跳转
+          click(e) {
+            console.log("click");
+          }
+        }
+      }
+    };
+  },
+  components: {
+    // 使用swiper组件
+    swiper,
+    swiperSlide
+  },
+  mounted() {
+    this.$nextTick(() => {
+      console.log(1);
+    });
+  }
+};
 </script>
+<style  scoped>
+.home li {
+  list-style: none;
+}
+
+.home {
+  width: 100vw;
+  height: 100vh;
+  background-color: lightsalmon;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  overflow: hidden;
+  transition: all 1s;
+}
+
+.home .nav {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 5%;
+}
+.home .nav .tittle {
+  font-weight: bolder;
+}
+.home .nav li {
+  display: inline-block;
+  color: #ffffff;
+  line-height: 10px;
+}
+
+.home .user {
+  margin-left: 12%;
+  color: #ffffff;
+  font-size: 25px;
+}
+
+.home .user li {
+  margin: 5%;
+}
+
+.home .swiper-container {
+  overflow: initial;
+  width: 70vw;
+  height: 60vh;
+}
+
+.home .swiper-slide {
+  background-color: #ffffff;
+  box-shadow: 0 15px 15px 0 rgba(15, 37, 64, 0.3);
+  border-radius: 30px;
+  margin-right: 5%;
+}
+
+.home span {
+  font-size: 2em;
+}
+
+.home .swiper-slide:nth-child(even) p > span {
+  color: lightskyblue;
+}
+
+.home .swiper-slide:nth-child(odd) p > span {
+  color: lightsalmon;
+}
+
+.home .swiper-slide {
+  text-align: center;
+  line-height: 15vh;
+}
+</style>
