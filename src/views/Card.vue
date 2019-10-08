@@ -1,5 +1,5 @@
 <template>
-  <div class="card animated zoomIn">
+  <div class="card animated bounceInUp">
     <div class="nav">
       <span class="iconfont icon-icon-test" @click="goHome"></span>
     </div>
