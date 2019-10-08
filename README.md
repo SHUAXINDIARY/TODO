@@ -14,7 +14,17 @@
 
 # 3. vuex目录说明
 
-<!-- TOC -->autoauto- [1. 项目介绍](#1-项目介绍)auto- [2. 技术/资源](#2-技术资源)auto- [3. vuex目录说明](#3-vuex目录说明)auto- [4. 小结：](#4-小结)autoauto<!-- /TOC -->
+```
+|-store
+    |---store.js      //vuex主文件
+    |---mutations.js  //vuexroot模块的mutations
+    |---actons.js     //vuexroot模块的actions
+    |———modules       //state模块文件夹(存储事项分类,单独管理各自分类的内容)
+        |---all.js
+        |---plan.js
+        |---today.js
+```
+
 
 # 4. 小结：
 >在swiper配置项的事件函数内，获取vue实例
