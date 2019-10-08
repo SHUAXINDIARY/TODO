@@ -1,8 +1,8 @@
 <template>
   <transition
     name="setting"
-    enter-active-class="animated bounceInLeft"
-    leave-active-class="animated bounceOutLeft"
+    enter-active-class="animated fadeInLeft"
+    leave-active-class="animated fadeOutLeft"
   >
     <div class="con">
       <div class="nav">
@@ -12,11 +12,28 @@
         <p>Settings</p>
       </div>
       <ul class="list">
-        <li v-for="(item,index) in options" :key="index">
+        <li v-for="(item,index) in options" :key="index" @click="show=!show">
           <span>{{item.note}}</span>
           <i class="iconfont icon-icon-test2"></i>
         </li>
       </ul>
+      <transition
+        name="update"
+        enter-active-class="animated bounceInUp"
+        leave-active-class="animated bounceOutDown"
+      >
+        <div class="update" v-if="show">
+          <p>
+            <input type="text" placeholder="修改用户名" :value="user.name" ref="name"/>
+          </p>
+          <p>
+            <input type="text" placeholder="修改个性签名" :value="user.about" ref="about"/>
+          </p>
+          <p>
+            <button @click="ok">确定</button>
+          </p>
+        </div>
+      </transition>
     </div>
   </transition>
 </template>
@@ -25,6 +42,8 @@ export default {
   name: "setting",
   data() {
     return {
+      show: false,
+      user: {},
       options: [
         {
           index: 1,
@@ -36,7 +55,24 @@ export default {
   methods: {
     goHome() {
       this.$router.push("/");
+    },
+    ok() {
+      let user = {
+        name: this.$refs.name.value,
+        about: this.$refs.about.value
+      };
+      this.$store.commit({
+        type: "updateUser",
+        user: user,
+        succ() {
+          alert("修改成功");
+          this.show = false;
+        }
+      });
     }
+  },
+  mounted() {
+    this.user = this.$store.state.user;
   }
 };
 </script>
@@ -79,6 +115,31 @@ export default {
       }
       i {
         margin-right: 10%;
+      }
+    }
+  }
+  .update {
+    p {
+      width: 100%;
+      height: 5vh;
+      line-height: 5vh;
+      text-align: center;
+      input {
+        border: 1px solid gray;
+        border-radius: 30px;
+        height: 5vh;
+        outline: none;
+        text-align: center;
+        &::-webkit-input-placeholder {
+          text-align: center;
+        }
+      }
+      button {
+        border: none;
+        width: 100px;
+        height: 50px;
+        font-size: 1rem;
+        font-weight: bolder;
       }
     }
   }

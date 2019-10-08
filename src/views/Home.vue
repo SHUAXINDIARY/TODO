@@ -1,30 +1,28 @@
 <template>
-  <div class="con">
-    <div class="home" ref="target">
-      <ul class="nav">
-        <li>
-          <span class="iconfont icon-icon-test1" @click="goSetting"></span>
-        </li>
-        <li class="tittle">TODO</li>
-        <li>
-          <span class="iconfont icon-search"></span>
-        </li>
-      </ul>
-      <!-- 渲染用户信息 -->
-      <ul class="user">
-        <li v-for="(item,index) in $store.state.user" :key="index">{{item}}</li>
-      </ul>
-      <!-- 轮播 -->
-      <swiper class="swiper-container" :options="swiperOption" ref="mySwiper">
-        <swiper-slide ref="slide" class="swiper-slide" v-for="(item,index) in cards" :key="index">
-          <p>
-            <span :class="item.icon"></span>
-          </p>
-          <p>{{item.name}}</p>
-          <p>{{item.des}}</p>
-        </swiper-slide>
-      </swiper>
-    </div>
+  <div class="home" ref="target">
+    <ul class="nav">
+      <li>
+        <span class="iconfont icon-icon-test1" @click="goSetting"></span>
+      </li>
+      <li class="tittle">TODO</li>
+      <li>
+        <span class="iconfont icon-search"></span>
+      </li>
+    </ul>
+    <!-- 渲染用户信息 -->
+    <ul class="user">
+      <li v-for="(item,index) in $store.state.user" :key="index">{{item}}</li>
+    </ul>
+    <!-- 轮播 -->
+    <swiper class="swiper-container" :options="swiperOption" ref="mySwiper">
+      <swiper-slide ref="slide" class="swiper-slide" v-for="(item,index) in cards" :key="index">
+        <p>
+          <span :class="item.icon"></span>
+        </p>
+        <p>{{item.name}}</p>
+        <p>{{item.des}}</p>
+      </swiper-slide>
+    </swiper>
   </div>
 </template>
 
@@ -74,14 +72,12 @@ export default {
 };
 </script>
 <style  lang='less' scoped>
-.con {
-  background-color: lightsalmon;
-}
 .home li {
   list-style: none;
 }
 
 .home {
+  background-color: lightsalmon;
   width: 100vw;
   height: 100vh;
   display: flex;

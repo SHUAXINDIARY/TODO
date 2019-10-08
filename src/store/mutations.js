@@ -17,5 +17,10 @@ export default {
         let index = payload.index;
         // 添加新项目
         vm.$delete(state[payload.data].items, index);
+    },
+    updateUser(state, payload) {
+        console.log(payload.user);
+        state.user = payload.user;
+        payload.succ();
     }
 }

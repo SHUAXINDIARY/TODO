@@ -1,6 +1,10 @@
 <template>
-  <transition name="card" enter-active-class="animated bounceInUp" leave-active-class="animated bounceOutDown">
-    <div class="card ">
+  <transition
+    name="card"
+    enter-active-class="animated fadeInUp"
+    leave-active-class="animated fadeOutDown"
+  >
+    <div class="card">
       <div class="nav">
         <span class="iconfont icon-icon-test" @click="goHome"></span>
       </div>
