@@ -1,9 +1,9 @@
 <template>
   <div class="con">
-    <div class="home animated bounceInDown" ref="target">
+    <div class="home" ref="target">
       <ul class="nav">
         <li>
-          <span class="iconfont icon-instruction"></span>
+          <span class="iconfont icon-icon-test1" @click="goSetting"></span>
         </li>
         <li class="tittle">TODO</li>
         <li>
@@ -60,6 +60,11 @@ export default {
     // 使用swiper组件
     swiper,
     swiperSlide
+  },
+  methods: {
+    goSetting() {
+      this.$router.push({ path: "/setting" });
+    }
   },
   mounted() {
     // 获取store的数据 渲染到该页

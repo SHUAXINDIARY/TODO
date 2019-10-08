@@ -22,7 +22,7 @@ const state = {
     },
     {
       name: "All",
-      icon: "iconfont icon-favoriteslist",
+      icon: "iconfont icon-instruction",
       des: "全部"
     }
   ],

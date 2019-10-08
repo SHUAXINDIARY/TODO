@@ -1,32 +1,34 @@
 <template>
-  <div class="card animated bounceInUp">
-    <div class="nav">
-      <span class="iconfont icon-icon-test" @click="goHome"></span>
-    </div>
-    <div class="tittle">
-      <p>{{tittle}}</p>
-      <p>{{items.length}} Tasks</p>
-    </div>
-    <ul class="list">
-      <li v-for="(item,index) in items" :key="index">
-        <p @click="mark(index)" :class="{ok:item.status}">
-          <i></i>
-          <span>{{item.note}}</span>
+  <transition name="card" enter-active-class="animated bounceInUp" leave-active-class="animated bounceOutDown">
+    <div class="card ">
+      <div class="nav">
+        <span class="iconfont icon-icon-test" @click="goHome"></span>
+      </div>
+      <div class="tittle">
+        <p>{{tittle}}</p>
+        <p>{{items.length}} Tasks</p>
+      </div>
+      <ul class="list">
+        <li v-for="(item,index) in items" :key="index">
+          <p @click="mark(index)" :class="{ok:item.status}">
+            <i></i>
+            <span>{{item.note}}</span>
+          </p>
+        </li>
+      </ul>
+      <div class="input animated rollIn" v-if="input">
+        <p>
+          <input type="text" placeholder="这里输入" ref="in" />
         </p>
-      </li>
-    </ul>
-    <div class="input animated rollIn" v-if="input">
-      <p>
-        <input type="text" placeholder="这里输入" ref="in" />
-      </p>
-      <p>
-        <button @click="addItem($refs.in.value)">确定</button>
-      </p>
+        <p>
+          <button @click="addItem($refs.in.value)">确定</button>
+        </p>
+      </div>
+      <div class="btn">
+        <span @click="showAdd">+</span>
+      </div>
     </div>
-    <div class="btn">
-      <span @click="showAdd">+</span>
-    </div>
-  </div>
+  </transition>
 </template>
 <script>
 export default {
