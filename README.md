@@ -8,6 +8,8 @@
 
 >过渡动画:animate.css
 
+>正则表达式:判断用户名是否为空
+
 # 小结：
 >在swiper配置项的事件函数内，获取vue实例
 - 1
@@ -46,4 +48,34 @@ data(){
     }
 }
 ...
+```
+
+>判断用户名是否为空
+```javascript
+// html
+...
+<input type="text" ref="name">
+<button @click='ok'>ok</button>
+...
+
+// js
+...
+methods:{
+    ok() {
+        let vm = this;
+        // 1.获取输入的值
+        let name=this.$refs.name.value;
+        // 2.定义正则表达式
+        var reg = /^\s*|\s*$/g;
+        // 3.进行判断
+        if (name.replace(reg, "") == "") {
+            alert("请输入用户名");
+            return false;
+        } else {
+            // 提交表单或者等等操作
+        }
+    }
+}
+...
+
 ```
