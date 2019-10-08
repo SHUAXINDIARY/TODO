@@ -24,10 +24,10 @@
       >
         <div class="update" v-if="show">
           <p>
-            <input type="text" placeholder="修改用户名" :value="user.name" ref="name"/>
+            <input type="text" placeholder="修改用户名" :value="user.name" ref="name" />
           </p>
           <p>
-            <input type="text" placeholder="修改个性签名" :value="user.about" ref="about"/>
+            <input type="text" placeholder="修改个性签名" :value="user.about" ref="about" />
           </p>
           <p>
             <button @click="ok">确定</button>
@@ -57,18 +57,25 @@ export default {
       this.$router.push("/");
     },
     ok() {
+      let vm = this;
       let user = {
         name: this.$refs.name.value,
         about: this.$refs.about.value
       };
-      this.$store.commit({
-        type: "updateUser",
-        user: user,
-        succ() {
-          alert("修改成功");
-          this.show = false;
-        }
-      });
+      var reg = /^\s*|\s*$/g;
+      if (user.name.replace(reg, "") == "") {
+        alert("请输入用户名");
+        return false;
+      } else {
+        this.$store.commit({
+          type: "updateUser",
+          user: user,
+          succ() {
+            alert("修改成功");
+            vm.show = false;
+          }
+        });
+      }
     }
   },
   mounted() {
