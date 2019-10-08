@@ -16,9 +16,9 @@ const state = {
       des: "今天"
     },
     {
-      name: "Plan",
+      name: "Overdue",
       icon: "iconfont icon-clock",
-      des: "计划"
+      des: "过期"
     },
     {
       name: "All",
@@ -31,7 +31,7 @@ const state = {
 import mutations from './mutations'
 import actions from './actions'
 import Today from './modules/today'
-import Plan from './modules/plan'
+import Overdue from './modules/overdue'
 import All from './modules/all'
 
 
@@ -43,7 +43,7 @@ export default new Vuex.Store({
   actions,
   modules: {
     Today,
-    Plan,
+    Overdue,
     All
   }
 })
