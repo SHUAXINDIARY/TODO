@@ -20,9 +20,7 @@
     |---mutations.js  //vuexroot模块的mutations
     |---actons.js     //vuexroot模块的actions
     |———modules       //state模块文件夹(存储事项分类,单独管理各自分类的内容)
-        |---all.js
-        |---plan.js
-        |---today.js
+        |---items.js  //存放用户事项模块
 ```
 
 
