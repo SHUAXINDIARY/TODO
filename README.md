@@ -1,4 +1,5 @@
 # [在线预览](https://shuaxindiary.github.io/TODO/)
+>打开开发者预览并调移动端模式，并刷新
 
 # 1. 项目介绍
 >一个待办事项的项目(类似iphone的提醒事项)
@@ -119,5 +120,15 @@ methods:{
     }
 }
 ...
+```
 
+>更改打包后资源依赖路径
+
+```js
+module.exports = {
+    // 更改打包后 index依赖的资源路径
+    publicPath: process.env.NODE_ENV === 'production'
+        ? '/TODO/'
+        : '/'
+}
 ```
