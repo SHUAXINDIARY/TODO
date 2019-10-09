@@ -70,7 +70,6 @@ export default {
       this.$store.commit({
         type: "delItem",
         data: vm.tittle,
-        // item: vm.$refs.in.value,
         index: index
       });
     },
@@ -82,15 +81,14 @@ export default {
       this.$store.commit({
         type: "addItem",
         data: vm.tittle,
-        // item: vm.$refs.in.value,
         item: val,
         succ() {
           // 成功后重新渲染数据
           vm.initData();
+          console.log('成功');
         }
       });
       this.input = false;
-      console.log(this.$store.state[this.tittle].items);
     },
     // 初始化页面数据
     initData() {
@@ -99,9 +97,13 @@ export default {
       // 获取组件名
       this.tittle = this.$store.state.cards[cardIndex].name;
       let name = this.tittle;
-      // 获取待办事项
-      if (this.$store.state[name].items.length != 0) {
-        this.items = [...this.$store.state[name].items];
+      // 获取待办事项  
+      if (name == "All") {
+        // 进入的是all组件 获取所有事项
+        this.items = [...this.$store.getters.getAll];
+      } else {
+        // 进入的是其他模块 获取对应的事项
+        this.items = [...this.$store.state.Items[name]];
       }
     }
   },

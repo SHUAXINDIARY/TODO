@@ -8,7 +8,8 @@ export default {
             note: payload.item
         };
         // 添加新项目
-        vm.$set(state[payload.data].items, state[payload.data].items.length, item);
+        vm.$set(state.Items[payload.data], state.Items[payload.data].length, item);
+        console.log(state);
         // 添加完毕后执行回调
         payload.succ();
     },
@@ -16,7 +17,7 @@ export default {
         // 获取传递过来的数据
         let index = payload.index;
         // 添加新项目
-        vm.$delete(state[payload.data].items, index);
+        vm.$delete(state.Items[payload.data], index);
     },
     updateUser(state, payload) {
         console.log(payload.user);

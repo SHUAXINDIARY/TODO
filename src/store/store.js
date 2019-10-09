@@ -30,10 +30,7 @@ const state = {
 
 import mutations from './mutations'
 import actions from './actions'
-import Today from './modules/today'
-import Overdue from './modules/overdue'
-import All from './modules/all'
-
+import Items from './modules/items'
 
 
 
@@ -42,8 +39,6 @@ export default new Vuex.Store({
   mutations,
   actions,
   modules: {
-    Today,
-    Overdue,
-    All
-  }
+    Items
+  },
 })
