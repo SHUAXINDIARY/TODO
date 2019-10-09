@@ -49,16 +49,12 @@ export default {
     goHome() {
       this.$router.push("/");
     },
-    // 改变待办事项状态  并判断是否删除
+    // 改变待办事项状态
     mark(index) {
+      console.log(`before=${this.items[index].status}`);
       // status时true  完成 删除
       this.items[index].status = !this.items[index].status;
-      this.delItem(index);
-
-      // status 是false 未完成 添加回来
-      if (this.items[index].status == false) {
-        this.addItem(this.items[index].note);
-      }
+      console.log(`after=${this.items[index].status}`);
     },
     // 切换添加任务模块显示
     showAdd() {
@@ -70,12 +66,15 @@ export default {
       this.$store.commit({
         type: "delItem",
         data: vm.tittle,
-        index: index
+        index: index,
+        succ() {
+          // 成功后重新渲染数据
+          console.log("del成功");
+        }
       });
     },
     // 添加新任务
     addItem(val) {
-      console.log(val);
       // 添加到全局状态中
       let vm = this;
       this.$store.commit({
@@ -85,7 +84,7 @@ export default {
         succ() {
           // 成功后重新渲染数据
           vm.initData();
-          console.log('成功');
+          console.log("成功");
         }
       });
       this.input = false;
@@ -97,12 +96,12 @@ export default {
       // 获取组件名
       this.tittle = this.$store.state.cards[cardIndex].name;
       let name = this.tittle;
-      // 获取待办事项  
-      if (name == "All") {
-        // 进入的是all组件 获取所有事项
+      // 获取待办事项
+      if (this.$store.state.Items[name].length == 0 && name == "All") {
+        // 当all模块第一次进入时 通过getters 初始化state中的all属性的数据
         this.items = [...this.$store.getters.getAll];
       } else {
-        // 进入的是其他模块 获取对应的事项
+        // 进入页面注入对应的state中的数据
         this.items = [...this.$store.state.Items[name]];
       }
     }
@@ -110,6 +109,14 @@ export default {
   // 获取store中数据
   mounted() {
     this.initData();
+  },
+  // 在离开当前页时 根据项目的status判断是否删除(是否完成)
+  destroyed() {
+    for (let i = 0; i < this.items.length; i++) {
+      if (this.items[i].status == true) {
+        this.delItem(i);
+      }
+    }
   }
 };
 </script>

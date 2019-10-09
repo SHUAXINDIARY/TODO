@@ -23,11 +23,11 @@ export default {
         All:[]
         // }
     },
-    getters:{
+    getters: {
         getAll(state) {
-            for(let i in state){
-                if(i!='All'){
-                    for(let j=0;j<state[i].length;j++){
+            for (let i in state) {
+                if (i != 'All') {
+                    for (let j = 0; j < state[i].length; j++) {
                         state.All.push(state[i][j]);
                     }
                 }
