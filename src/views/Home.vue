@@ -1,29 +1,35 @@
 <template>
-  <div class="home" ref="target">
-    <ul class="nav">
-      <li>
-        <span class="iconfont icon-icon-test1" @click="goSetting"></span>
-      </li>
-      <li class="tittle">TODO</li>
-      <li>
-        <span class="iconfont icon-search"></span>
-      </li>
-    </ul>
-    <!-- 渲染用户信息 -->
-    <ul class="user">
-      <li v-for="(item,index) in $store.state.user" :key="index">{{item}}</li>
-    </ul>
-    <!-- 轮播 -->
-    <swiper class="swiper-container" :options="swiperOption" ref="mySwiper">
-      <swiper-slide ref="slide" class="swiper-slide" v-for="(item,index) in cards" :key="index">
-        <p>
-          <span :class="item.icon"></span>
-        </p>
-        <p>{{item.name}}</p>
-        <p>{{item.des}}</p>
-      </swiper-slide>
-    </swiper>
-  </div>
+  <transition
+    name="card"
+    enter-active-class="animated zoomIn"
+    leave-active-class="animated fadeOut"
+  >
+    <div class="home" ref="target">
+      <ul class="nav">
+        <li>
+          <span class="iconfont icon-icon-test1" @click="goSetting"></span>
+        </li>
+        <li class="tittle">TODO</li>
+        <li>
+          <span class="iconfont icon-search"></span>
+        </li>
+      </ul>
+      <!-- 渲染用户信息 -->
+      <ul class="user">
+        <li v-for="(item,index) in $store.state.user" :key="index">{{item}}</li>
+      </ul>
+      <!-- 轮播 -->
+      <swiper class="swiper-container" :options="swiperOption" ref="mySwiper">
+        <swiper-slide ref="slide" class="swiper-slide" v-for="(item,index) in cards" :key="index">
+          <p>
+            <span :class="item.icon"></span>
+          </p>
+          <p>{{item.name}}</p>
+          <p>{{item.des}}</p>
+        </swiper-slide>
+      </swiper>
+    </div>
+  </transition>
 </template>
 
 <script>
