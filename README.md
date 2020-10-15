@@ -3,10 +3,11 @@
 
 # 列表
 - vue2.x+vuex
-- vue3.x+vuex
+- vue3.x
 - react+redux
 - react+mobx
 - html+js
 
 # 已完成
 - vue2.x+vuex
+- vue3
